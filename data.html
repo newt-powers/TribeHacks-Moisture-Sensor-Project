@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Data{% endblock title %}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    Your plant needs to be watered. <br>
+    <iframe style="background: #FFFFFF;border: none;border-radius: 2px;box-shadow: 0 2px 10px 0 rgba(70, 76, 79, .2);" width="640" height="480" src="https://charts.mongodb.com/charts-project-0-fdqjjys/embed/charts?id=662462f5-4a6a-46cf-891f-ec829e1df31e&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+  <br>
+    We were unable to finish integrating MongoDB into our website, but here is the code that would return the most recent value <br>
+    #Importing the necessary mongo stuff <br>
+  </p>
+  <p align="left">
+    from pymongo.mongo_client import MongoClient <br>
+    from pymongo.server_api import ServerApi <br>
+
+    uri = "mongodb+srv://jmbradecamp:Bbn028YcSIGBSrSI@tribehackix.j9oe55e.mongodb.net/?retryWrites=true&w=majority&appName=TribeHackIX" <br>
+    # Create a new client and connect to the server <br>
+    client = MongoClient(uri, server_api=ServerApi('1')) <br>
+    db = client.soil_data <br>
+    collection = db.soil_collection <br>
+    moistureValues = db.moistureValues <br>
+
+    def addToDatabase(moistureValue): <br>
+        moistureValues.insert_one({"Value: ": moistureValue, "date": datetime.datetime.now(tz=datetime.timezone.utc)}) <br>
+
+    def getRecentValue(): <br>
+        for data in moistureValues.find().limit(1).sort([("date", -1)]):#THE WAY TO FIND THE MOST RECENT VALUE <br>
+            return data
+  
+  </p>
+{% endblock content %}

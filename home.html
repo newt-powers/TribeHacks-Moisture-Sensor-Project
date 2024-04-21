@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2>{% block title %}Home{% endblock title %}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    Welcome to our TribeHacks IX project! This project uses a soil moisture sensor to send alerts to water your plants. 
+    <a href="{{ url_for('pages.about') }}">About page</a>.
+    <a href="{{ url_for('pages.data') }}">Data</a>.
+
+
+  </p>
+{% endblock content %}
